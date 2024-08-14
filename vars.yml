@@ -1,0 +1,22 @@
+---
+postgresql_databases: [db1, db2]
+
+postgresql_users:
+  - { db: db1, name: vincent, password: "{{ vault_postgresql_vincent_password }}" }
+  - { db: db2, name: foobar,  password: "{{ vault_postgresql_foobar_password }}"  }
+
+postgresql_schemas:
+  - { db: db1, name: vincent, owner: vincent }
+  - { db: db2, name: foobar,  owner: foobar  }
+
+postgresql_privs:
+  - { db: db1, roles: vincent, privs: ALL, type: database }
+  - { db: db2, roles: foobar,  privs: ALL, type: database }
+
+postgresql_hba_entries:
+  - { contype: local, databases: all, users: all,                        method: peer          }
+  - { contype: host,  databases: db1, users: vincent,  address: samenet, method: scram-sha-256 }
+  - { contype: host,  databases: db2, users: foobar,   address: samenet, method: scram-sha-256 }
+
+postgresql_extensions:
+  - { db: db1, name: hstore }
