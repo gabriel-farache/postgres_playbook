@@ -1,5 +1,5 @@
 ---
-- hosts: ansible-1
+- hosts: node2
 
   vars_files:
     - vault.yml
