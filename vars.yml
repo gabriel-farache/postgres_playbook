@@ -2,7 +2,7 @@
 postgresql_databases: [petclinic, db2]
 
 postgresql_users:
-  - { db: petclinic, name: petclinic, password: "{{ vault_postgresql_vincent_password }}" }
+  - { db: petclinic, name: petclinic, password: "{{ vault_postgresql_petclinic_password }}" }
   - { db: db2, name: foobar,  password: "{{ vault_postgresql_foobar_password }}"  }
 
 postgresql_schemas:
