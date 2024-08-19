@@ -1,0 +1,60 @@
+---
+- name: Uninstall PostgreSQL
+  hosts: node2
+  become: yes
+  vars:
+    postgresql_packages:
+      - postgresql
+      - postgresql-server
+      - postgresql-contrib
+      - postgresql-client
+    postgresql_data_directories:
+      - /var/lib/pgsql
+      - /var/lib/postgresql
+    postgresql_service_name: "postgresql" 
+
+  tasks:
+    - name: Stop PostgreSQL service
+      ansible.builtin.service:
+        name: "{{ postgresql_service_name }}"
+        state: stopped
+      ignore_errors: true
+
+    - name: Disable PostgreSQL service
+      ansible.builtin.service:
+        name: "{{ postgresql_service_name }}"
+        enabled: no
+      ignore_errors: true
+
+    - name: Remove PostgreSQL packages
+      ansible.builtin.package:
+        name: "{{ postgresql_packages }}"
+        state: absent
+      ignore_errors: true
+
+    - name: Remove PostgreSQL data directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+        recurse: yes
+      loop: "{{ postgresql_data_directories }}"
+      ignore_errors: true
+
+    - name: Remove additional PostgreSQL configuration files
+      ansible.builtin.file:
+        path: /etc/postgresql
+        state: absent
+        recurse: yes
+      ignore_errors: true
+
+    - name: Remove systemd service files (if any)
+      ansible.builtin.file:
+        path: "/etc/systemd/system/{{ postgresql_service_name }}.service"
+        state: absent
+      ignore_errors: true
+
+    - name: Reload systemd to apply changes
+      ansible.builtin.systemd:
+        daemon_reload: yes
+      when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian'
+      ignore_errors: true
