@@ -16,3 +16,5 @@ postgresql_hba_entries:
 
 postgresql_extensions:
   - { db: petclinic, name: hstore }
+
+postgresql_listen_addresses: "*"
