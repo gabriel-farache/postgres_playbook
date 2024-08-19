@@ -10,7 +10,6 @@
       - postgresql-client
     postgresql_data_directories:
       - /var/lib/pgsql
-      - /var/lib/postgresql
     postgresql_service_name: "postgresql" 
 
   tasks:
@@ -38,13 +37,6 @@
         state: absent
         recurse: yes
       loop: "{{ postgresql_data_directories }}"
-      ignore_errors: true
-
-    - name: Remove additional PostgreSQL configuration files
-      ansible.builtin.file:
-        path: /etc/postgresql
-        state: absent
-        recurse: yes
       ignore_errors: true
 
     - name: Remove systemd service files (if any)
