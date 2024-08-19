@@ -29,6 +29,24 @@
         state: started
         enabled: true
 
+    - name: Ensure the postgresql.conf file exists
+      stat:
+        path: "{{ postgresql_conf_path }}"
+      register: postgresql_conf_stat
+
+    - name: Fail if postgresql.conf file is not found
+      fail:
+        msg: "The postgresql.conf file was not found at {{ postgresql_conf_path }}"
+      when: not postgresql_conf_stat.stat.exists
+
+    - name: Update listen_addresses in postgresql.conf
+      ansible.builtin.lineinfile:
+        path: "{{ postgresql_conf_path }}"
+        regexp: "^#?listen_addresses ="
+        line: "listen_addresses = '{{ postgresql_listen_addresses }}'"
+        state: present
+        backup: yes
+
     - name: Create the databases
       community.postgresql.postgresql_db:
         name: "{{ item }}"
