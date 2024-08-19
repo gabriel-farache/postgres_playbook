@@ -18,3 +18,5 @@ postgresql_extensions:
   - { db: petclinic, name: hstore }
 
 postgresql_listen_addresses: "*"
+
+postgresql_conf_path: "/var/lib/pgsql/data/postgresql.conf"
