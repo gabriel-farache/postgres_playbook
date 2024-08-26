@@ -1,6 +1,6 @@
 ---
 - name: Stop and delete PostgreSQL container on Podman
-  hosts: all
+  hosts: node2
   become: true  # Escalate privileges to perform actions as a different user
   tasks:
     
