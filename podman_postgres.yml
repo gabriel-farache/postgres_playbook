@@ -30,6 +30,7 @@
     ansible.builtin.command:
       cmd: >
         podman run -d --network skupper --name {{ postgres_container_name }}
+        -p 5432:5432
         -e POSTGRESQL_USER={{ postgres_user }}
         -e POSTGRESQL_PASSWORD={{ postgres_password }}
         -e POSTGRESQL_DATABASE={{ postgres_db }}
