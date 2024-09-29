@@ -32,6 +32,7 @@
    - 6.2 Refueling Procedures
    - 6.3 Power Distribution and Efficiency
 
+
 7. **System Updates and Upgrades**
    - 7.1 Firmware Updates
    - 7.2 Hardware Upgrades
@@ -83,5 +84,6 @@ cutting-edge engine remains at the forefront of space propulsion
 technology. By committing to excellence and vigilance, operators can
 fully leverage the capabilities of the QuantumPulse 3000, driving
 successful missions and exploring the vast frontiers of space.
+
 
 ENJOY YOUR ENGINE!
