@@ -1,6 +1,6 @@
 ---
 - name: Uninstall PostgreSQL
-  hosts: node2
+  hosts: 	petclinic-db
   become: yes
   vars:
     postgresql_packages:
