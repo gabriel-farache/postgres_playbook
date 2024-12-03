@@ -11,7 +11,7 @@
           kind: PersistentVolumeClaim
           metadata:
             name: postgres-data
-            namespace: "{{ target-namespace }}"
+            namespace: "{{ targetNamespace }}"
           spec:
             accessModes:
             - ReadWriteOnce
@@ -26,7 +26,7 @@
           kind: Deployment
           metadata:
             name: postgresql
-            namespace: "{{ target-namespace }}"
+            namespace: "{{ targetNamespace }}"
             labels:
               app: spring-petclinic
               app.kubernetes.io/component: database
@@ -100,7 +100,7 @@
             annotations:
               description: Exposes the database server
             name: postgresql
-            namespace: "{{ namespace }}"
+            namespace: "{{ targetNamespace }}"
           spec:
             ports:
             - name: postgresql
