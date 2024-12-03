@@ -84,8 +84,6 @@
                   volumeMounts:
                   - mountPath: /var/lib/pgsql/data
                     name: postgres-data
-                securityContext:
-                  fsGroup: 26
                 volumes:
                 - name: postgres-data
                   persistentVolumeClaim:
